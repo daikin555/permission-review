@@ -19,9 +19,22 @@ Bash / Read / Write / Edit / Glob / Grep / WebFetch / WebSearch / Skill
 
 ## セットアップ
 
+### 前提条件
+
+`permission-logger.sh` は `jq` コマンドに依存しています。未インストールの場合は先にインストールしてください:
+
+```bash
+# macOS
+brew install jq
+
+# Ubuntu/Debian
+sudo apt-get install jq
+```
+
 ### 1. スクリプトの配置
 
 ```bash
+mkdir -p ~/.claude/scripts
 cp scripts/permission-logger.sh ~/.claude/scripts/permission-logger.sh
 chmod +x ~/.claude/scripts/permission-logger.sh
 ```

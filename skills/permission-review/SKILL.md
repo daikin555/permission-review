@@ -1,6 +1,6 @@
 ---
 name: permission-review
-description: Analyzes ~/.claude/logs/permissions/ JSONL logs to identify frequently used tool patterns and propose permission rule cleanup. Use when user says "permission review", "パーミッション整理", "review permissions", or "/permission-review".
+description: Analyzes ~/.claude/logs/permissions/ JSONL logs to identify frequently used tool patterns and propose permission rule cleanup. Use when user says "permission review", "パーミッション整理", "パーミッションレビュー", "権限整理", "許可設定の見直し", "review permissions", or "/permission-review". Also use PROACTIVELY when the Stop hook outputs a permission review reminder (e.g. "📋 パーミッションログが〇件溜まっています").
 author: daichi
 category: productivity
 ---
@@ -64,7 +64,18 @@ category: productivity
 | `npm install express` | `Bash(npm install:*)` |
 | `/usr/local/bin/tool arg` | `Bash(/usr/local/bin/tool:*)` |
 
-**gitサブコマンド判定**: `git add`, `git commit`, `git push`, `git pull`, `git checkout`, `git merge`, `git diff`, `git fetch`, `git mv`, `git remote`, `git log`, `git status` などはサブコマンドまで含めてパターン化する。その他のコマンドは先頭トークンのみ。
+**サブコマンドまで含めるコマンド一覧**:
+
+以下のコマンドはサブコマンドまで含めてパターン化する:
+
+- **git**: `git add`, `git commit`, `git push`, `git pull`, `git checkout`, `git merge`, `git diff`, `git fetch`, `git mv`, `git remote`, `git log`, `git status`, `git stash`, `git rebase`, `git tag`, `git branch` など
+- **npm**: `npm install`, `npm run`, `npm test`, `npm build`, `npm publish` など
+- **docker**: `docker build`, `docker run`, `docker push`, `docker pull`, `docker compose` など
+- **cargo**: `cargo build`, `cargo run`, `cargo test`, `cargo add` など
+- **kubectl**: `kubectl apply`, `kubectl get`, `kubectl delete`, `kubectl describe` など
+- **gh**: `gh pr`, `gh issue`, `gh repo`, `gh release` など
+
+その他のコマンドは先頭トークンのみでパターン化する（例: `ls`, `grep`, `cat`, `python3` など）。
 
 #### Read / Write / Edit / Glob / Grep
 
